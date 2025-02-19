@@ -24,6 +24,7 @@ async def jotform(request: Request):
     try: 
         payload = await request.json()
         keys = list(payload.keys())
+        print(f"Success | keys: {keys}")
         request = Request
         # Find a way to get the channel webhook URL form telex
         url = "https://ping.telex.im/v1/webhooks/0195181a-e640-7f85-a0c6-d32f46804380"
@@ -35,6 +36,7 @@ async def jotform(request: Request):
         }
         telex_response = notifications(url, payload)
     except Exception as e:
+        print(f"Failed | error: {e}")
         return {"status": "error", "message": str(e)}
     return JSONResponse(status_code = status.HTTP_200_OK,
                         content = {"response": telex_response, 
