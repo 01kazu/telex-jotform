@@ -3,6 +3,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from integration_conf import router as integration_router
+from config import settings
 
 app = FastAPI()
 
@@ -14,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(integration_router)
+app.include_router(integration_router, prefix=settings.API_PREFIX)
 
 @app.get("/")
 def hello_world():
