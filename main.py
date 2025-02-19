@@ -38,7 +38,9 @@ async def jotform(request: Request):
     except Exception as e:
         print(f"Failed | error: {e}")
         return {"status": "error", "message": str(e)}
-    return JSONResponse(status_code = status.HTTP_200_OK, content = {"response": "Form has been filled by User2"})
+    return JSONResponse(status_code = status.HTTP_200_OK, 
+                        content = {"response": "Form has been filled by User2",
+                                   "telex_response": telex_response})
 
 
 def notifications(url, payload):
