@@ -22,11 +22,10 @@ def hello_world():
 @app.post("/jotform")
 async def jotform(request: Request):
     try:
-        print(f"Info | Step !: Achieved")
-        payload = await request.json()
+        print(f"Info | Step 1: Achieved")
+        form_data = await request.form()
         print(f"Info | Step 2: Achieved")
-        keys = list(payload.keys())
-        print(f"Success | keys: {keys}")
+        print(form_data)
         # Find a way to get the channel webhook URL form telex
         url = "https://ping.telex.im/v1/webhooks/0195181a-e640-7f85-a0c6-d32f46804380"
         payload = {
@@ -39,9 +38,7 @@ async def jotform(request: Request):
     except Exception as e:
         print(f"Failed | error: {e}")
         return {"status": "error", "message": str(e)}
-    return JSONResponse(status_code = status.HTTP_200_OK,
-                        content = {"response": telex_response, 
-                                   "keys": keys})
+    return JSONResponse(status_code = status.HTTP_200_OK, content = {"response": "Form has been filled by User2"})
 
 
 def notifications(url, payload):
