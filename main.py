@@ -2,6 +2,7 @@ import requests
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from integration_conf import router as integration_router
 
 app = FastAPI()
 
@@ -13,6 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(integration_router)
 
 @app.get("/")
 def hello_world():
@@ -22,8 +24,10 @@ def hello_world():
 @app.post("/jotform")
 async def jotform(request: Request):
     try:
+        # Conditional Statement to check if request has form data
         print(f"Info | Step 1: Achieved")
         form_data = await request.form()
+        # form_data["rawRequest"][]
         print(f"Info | Step 2: Achieved")
         print(form_data)
         # Find a way to get the channel webhook URL form telex
