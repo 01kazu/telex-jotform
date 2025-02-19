@@ -19,7 +19,7 @@ def hello_world():
     return {"Hello": "World"}
 
 
-@app.get("/jotform")
+@app.post("/jotform")
 async def jotform(request: Request):
     try: 
         payload = await request.json()
