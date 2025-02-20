@@ -32,7 +32,8 @@ integration_json = {
         "default": "Channel ID"
       }
     ],
-    "target_url": "https://telex-jotform.onrender.com/api/v1/jotform"
+    "target_url": "https://telex-jotform.onrender.com/api/v1/jotform",
+    "tick_url": ""
   }
 }
 
