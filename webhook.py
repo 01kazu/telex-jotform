@@ -9,11 +9,23 @@ router = APIRouter()
 async def jotform(request: Request):
     try:
         # Remind the user to make sure channel ID is in the settings
-        body = await request.body()
-        print(body)
-        channel_id = body.get("settings").get("default")
+        body = await request.json()
+
+        channel_id = body.get("settings")[0].get("default")
+        print(channel_id)
         command = body.get("message")
-        command = command.strip()
+        if command is None:
+            telex_format = {
+                "event_name": "Invalid Command",
+                "message": f'Enter "/start" to activate JotForm Bot',
+                "status": "error",
+                "username": "JotForm Bot"
+            }
+            send_message(channel_id, telex_format)
+            return JSONResponse(status_code = status.HTTP_400_BAD_REQUEST, 
+                                content = {"response": "Invalid command"})
+        
+        command = command.strip().replace("<p>", "").replace("</p>", "")
 
         if command == "/start":
             jotform_url = f"https://telex-jotform.onrender.com/api/v1/jotform/{channel_id}" # Put API URL in settings
@@ -38,7 +50,7 @@ async def jotform(request: Request):
                                 content = {"response": "Invalid command"})
     except Exception as e:
         print(f"Failed | error: {e}")
-        return {"status": "error", "message": str(e)}
+        return {"status": "error", "message": str(e), "status": "error"}
 
     
 @router.get("/jotform/{channel_id}")
