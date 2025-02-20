@@ -54,7 +54,7 @@ async def jotform(request: Request):
 
     
 @router.get("/jotform/{channel_id}")
-async def jotform(request: Request, channel_id: str):
+async def jotform_notifications(request: Request, channel_id: str):
     try:
         # if form_data is None return 
         body = await request.body()
