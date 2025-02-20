@@ -39,6 +39,9 @@ async def jotform(request: Request):
             "status": "success",
             "username": "JotForm Bot"
         }
+        async with httpx.AsyncClient() as client:
+            response = await client.post(slack_webhook_url, json=slack_message)
+            response.raise_for_status()
         telex_response = notifications(url, payload)
     except Exception as e:
         print(f"Failed | error: {e}")
