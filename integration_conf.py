@@ -7,11 +7,11 @@ router = APIRouter()
 integration_json = {
   "data": {
     "date": {
-      "created_at": "2025-02-19",
-      "updated_at": "2025-02-19"
+      "created_at": "2025-02-20",
+      "updated_at": "2025-02-20"
     },
     "descriptions": {
-      "app_name": "JotForm Notifier",
+      "app_name": "Jot-Form Notifier",
       "app_description": "This integration gives notifications when forms are filled on Jotform.",
       "app_logo": "https://telex-jotform.onrender.com/logo",
       "app_url": "https://telex-jotform.onrender.com",
