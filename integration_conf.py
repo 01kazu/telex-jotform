@@ -32,8 +32,8 @@ integration_json = {
         "default": "Channel ID"
       }
     ],
-    "target_url": "https://telex-jotform.onrender.com/api/v1/integration",
-    "tick_url": "https://telex-jotform.onrender.com/api/v1/tick"
+    "target_url": "https://telex-jotform.onrender.com/api/v1/jotform",
+    "tick_url": "https://telex-jotform.onrender.com/api/v1/jotform",
   }
 }
 
@@ -41,14 +41,3 @@ integration_json = {
 @router.get("/integration.json")
 async def get_integration_json():
     return JSONResponse(content=integration_json)
-
-
-@router.get("/integration")
-async def integration(request: Request):
-    try:
-        payload = await request.json()
-        print(payload)
-        return {'payload': "payload recieved"}
-    except Exception as e:
-        print(f"Failed | error: {e}")
-        return {"status": "error", "message": str(e)}
