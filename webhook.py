@@ -90,9 +90,15 @@ async def jotform(request: Request):
     try:
         body = await request.json()
         channel_id = body.get("settings")[0].get("default")
-        print(channel_id)
         command = body.get("message")
-        print(command)
+        if command is None:
+            response = {
+                "event_name": "Invalid Command",
+                "message": f'Enter "/start" to activate JotForm Bot',
+                "status": "error",
+                "username": "JotForm Bot"   
+            }
+            return response
         return {"status": "success", "message": "Test Passed Successfully"}
     except Exception as e:
         return { "status": "error", "message": f"Test Failed Successfully: {e}"}
