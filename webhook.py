@@ -88,4 +88,8 @@ async def send_message(channel_id: str, telex_format: dict):
 @router.post("/jotform")
 async def jotform(request: Request):
     await body = request.json()
+    channel_id = body.get("settings")[0].get("default")
+    print(channel_id)
+    command = body.get("message")
+    print(command)
     return {"status": "success", "message": "Test Passed Successfully"}
