@@ -12,6 +12,7 @@ async def jotform(request: Request):
         body = await request.json()
 
         channel_id = body.get("settings")[0].get("default")
+        print(channel_id)
         command = body.get("message")
         if command is None:
             telex_format = {
