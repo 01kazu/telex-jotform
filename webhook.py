@@ -58,7 +58,6 @@ async def jotform(request: Request, channel_id: str):
     try:
         # if form_data is None return 
         body = await request.body()
-        print(body)
 
         form_data = await request.form()
         form_title = form_data.get("formTitle")
@@ -87,15 +86,6 @@ async def send_message(channel_id: str, telex_format: dict):
 
 
 @router.post("/jotform")
-def jotform(request: Request):
-    body = request.json()
-    print(body)
-    # response = requests.post(
-    #                 url,
-    #                 json=payload,
-    #                 headers={
-    #                     "Accept": "application/json",
-    #                     "Content-Type": "application/json"
-    #                 }
-    #             )
+async def jotform(request: Request):
+    await body = request.json()
     return {"status": "success", "message": "Test Passed Successfully"}
