@@ -99,6 +99,24 @@ async def jotform(request: Request):
                 "username": "JotForm Bot"   
             }
             return response
-        return {"status": "success", "message": "Test Passed Successfully"}
+        
+        command = command.strip().replace("<p>", "").replace("</p>", "")
+        if command == "/start":
+            jotform_url = f"https://telex-jotform.onrender.com/api/v1/jotform/{channel_id}" # Put API URL in settings
+            telex_format = {
+                "event_name": "Copy this url to your JotForm Webhook",
+                "message": f"{jotform_url}",
+                "status": "success",
+                "username": "JotForm Bot"
+            }
+            return telex_format
+        else:
+            response = {
+                "event_name": "Invalid Command",
+                "message": f'Enter "/start" to activate JotForm Bot',
+                "status": "error",
+                "username": "JotForm Bot"   
+            }
+            return response
     except Exception as e:
-        return { "status": "error", "message": f"Test Failed Successfully: {e}"}
+        return { "status": "error", "message": f"Test Failed Successfully: {e}"} 
