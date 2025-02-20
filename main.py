@@ -1,4 +1,5 @@
 import requests
+import httpx
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,17 +26,15 @@ def hello_world():
 @app.post("/jotform")
 async def jotform(request: Request):
     try:
-        # Conditional Statement to check if request has form data
-        print(f"Info | Step 1: Achieved")
+        # Conditional Statement to check if request has form data
         form_data = await request.form()
-        # form_data["rawRequest"][]
-        print(f"Info | Step 2: Achieved")
-        print(form_data)
+        form_title = form_data.get("formTitle")
+        print(form_title)
         # Find a way to get the channel webhook URL form telex
         url = "https://ping.telex.im/v1/webhooks/0195181a-e640-7f85-a0c6-d32f46804380"
         payload = {
             "event_name": "Form Sent",
-            "message": "Form has been filled by User2",
+            "message": f"{form_title} has been filled",
             "status": "success",
             "username": "JotForm Bot"
         }
