@@ -18,6 +18,7 @@ async def jotform_notify(request: Request, channel_id: str):
             "username": "JotForm Bot"
         }
         response = send_message(channel_id, telex_format)
+        print(f"{response = }")
         if response.status_code == 404:
             content = {"status": "error", "message": "Invalid channel ID"}
             return JSONResponse(status_code = status.HTTP_404_NOT_FOUND, content = content)
