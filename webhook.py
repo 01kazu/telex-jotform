@@ -94,7 +94,7 @@ async def jotform(request: Request):
 
     
 @router.post("/jotform-notify/{channel_id}")
-async def jotform(request: Request, channel_id: str):
+async def jotform_notify(request: Request, channel_id: str):
     try:
         form_data = await request.form()
         form_title = form_data.get("formTitle")
@@ -106,8 +106,8 @@ async def jotform(request: Request, channel_id: str):
             "username": "JotForm Bot"
         }
         send_message(channel_id, telex_format)
-        return JSONResponse(status_code = status.HTTP_200_OK, 
-                        content = telex_format)
+        # return JSONResponse(status_code = status.HTTP_200_OK, 
+        #                 content = telex_format)
 
     except Exception as e:
         print(f"Failed | error: {e}")
@@ -119,6 +119,7 @@ def send_message(channel_id: str, telex_format: dict):
     response = requests.post(channel_webhook_url, 
                                 json=telex_format,
                                 headers={"Content-Type": "application/json"})
-    return response.json()
+    print(f"{response = }")
+    # return response.json()
 
  
