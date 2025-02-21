@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 router = APIRouter()
@@ -39,5 +39,5 @@ integration_json = {
 
 
 @router.get("/integration.json")
-async def get_integration_json():
+def get_integration_json():
     return JSONResponse(content=integration_json)
