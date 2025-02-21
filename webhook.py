@@ -67,7 +67,8 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return JSONResponse(response)
+            return JSONResponse(status_code = status.HTTP_400_BAD_REQUEST,
+                                content = response)
         command = command.strip().replace("<p>", "").replace("</p>", "")
         if command == "/start":
             jotform_url = f"https://telex-jotform.onrender.com/api/v1/jotform-notify/{channel_id}" # Put API URL in settings
@@ -77,7 +78,8 @@ async def jotform(request: Request):
                 "status": "success",
                 "username": "JotForm Bot"
             }
-            return JSONResponse(response)
+            return JSONResponse(status_code = status.HTTP_200_OK,
+                                content = response)
         else:
             response = {
                 "event_name": "Invalid Command",
@@ -85,7 +87,8 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return JSONResponse(response)
+            return JSONResponse(status_code = status.HTTP_400_BAD_REQUEST,
+                                content = response)
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
 
@@ -105,9 +108,10 @@ async def jotform(request: Request, channel_id: str):
             "status": "success",
             "username": "JotForm Bot"
         }
-        send_message(channel_id, telex_format)
-        # return JSONResponse(status_code = status.HTTP_200_OK, 
-        #                 content = {"response": f"{form_title} form has been filled"})
+        # send_message(channel_id, telex_format)
+        return JSONResponse(status_code = status.HTTP_200_OK, 
+                        content = telex_format)
+
     except Exception as e:
         print(f"Failed | error: {e}")
         return {"status": "error", "message": str(e)}
