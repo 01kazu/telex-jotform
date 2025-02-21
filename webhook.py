@@ -1,5 +1,6 @@
 import requests
-from fastapi import Request, APIRouter
+from fastapi import Request, APIRouter, status
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 # how would i know the channel id is correct
@@ -17,9 +18,9 @@ async def jotform_notify(request: Request, channel_id: str):
             "username": "JotForm Bot"
         }
         response = send_message(channel_id, telex_format)
-        print(dir(response))
         if response.status_code == 404:
-            return {"status": "error", "message": "Invalid channel ID"}
+            content = {"status": "error", "message": "Invalid channel ID"}
+            return JSONResponse(status_code = status.HTTP_404_NOT_FOUND, content = content)
     except Exception as e:
         print(f"Failed | error: {e}") # Add logging
         return {"status": "error", "message": str(e)}
