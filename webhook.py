@@ -66,9 +66,7 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return response
-            # send_message(channel_id, response)
-        
+            send_message(channel_id, response)
         command = command.strip().replace("<p>", "").replace("</p>", "")
         if command == "/start":
             jotform_url = f"https://telex-jotform.onrender.com/api/v1/jotform/{channel_id}" # Put API URL in settings
@@ -78,8 +76,7 @@ async def jotform(request: Request):
                 "status": "success",
                 "username": "JotForm Bot"
             }
-            return response
-            # send_message(channel_id, response)
+            send_message(channel_id, response)
         else:
             response = {
                 "event_name": "Invalid Command",
@@ -87,13 +84,12 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return response
-            # send_message(channel_id, response)
+            send_message(channel_id, response)
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
 
     
-@router.get("/jotform/{channel_id}")
+@router.post("/jotform/{channel_id}")
 async def jotform(request: Request, channel_id: str):
     try:
         form_data = await request.form()
