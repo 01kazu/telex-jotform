@@ -17,7 +17,9 @@ async def jotform_notify(request: Request, channel_id: str):
             "username": "JotForm Bot"
         }
         response = send_message(channel_id, telex_format)
-        print(response)
+        print(dir(response))
+        if response.status_code == 404:
+            return {"status": "error", "message": "Invalid channel ID"}
     except Exception as e:
         print(f"Failed | error: {e}") # Add logging
         return {"status": "error", "message": str(e)}
