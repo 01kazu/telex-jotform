@@ -67,7 +67,7 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return JSONResponse(status_code = status.HTTP_400_BAD_REQUEST,
+            return JSONResponse(status_code = status.HTTP_200_OK,
                                 content = response)
         command = command.strip().replace("<p>", "").replace("</p>", "")
         if command == "/start":
@@ -87,7 +87,7 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return JSONResponse(status_code = status.HTTP_400_BAD_REQUEST,
+            return JSONResponse(status_code = status.HTTP_200_OK,
                                 content = response)
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
@@ -99,12 +99,9 @@ async def jotform(request: Request, channel_id: str):
         form_data = await request.form()
         form_title = form_data.get("formTitle")
         print(channel_id)
-
-        # Find a way to get the channel webhook URL form telex
-        # url = f"https://ping.telex.im/v1/webhooks/{0195181a-e640-7f85-a0c6-d32f46804380}"
         telex_format = {
             "event_name": "Form Sent",
-            "message": f"hello has been filled",
+            "message": f"{form_title} form has been filled",
             "status": "success",
             "username": "JotForm Bot"
         }
