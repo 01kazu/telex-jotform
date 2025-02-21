@@ -108,7 +108,7 @@ async def jotform(request: Request, channel_id: str):
             "status": "success",
             "username": "JotForm Bot"
         }
-        # send_message(channel_id, telex_format)
+        send_message(channel_id, telex_format)
         return JSONResponse(status_code = status.HTTP_200_OK, 
                         content = telex_format)
 
