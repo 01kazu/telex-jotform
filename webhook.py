@@ -77,8 +77,8 @@ async def jotform(request: Request):
                 "status": "success",
                 "username": "JotForm Bot"
             }
-            # send_message(channel_id, response)
-            return response
+            send_message(channel_id, response)
+            # return response
         else:
             response = {
                 "event_name": "Invalid Command",
@@ -86,8 +86,8 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            # send_message(channel_id, response)
-            return response
+            send_message(channel_id, response)
+            # return response
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
 
@@ -120,6 +120,6 @@ def send_message(channel_id: str, telex_format: dict):
     response = requests.post(channel_webhook_url, 
                                 json=telex_format,
                                 headers={"Content-Type": "application/json"})
-    print(response.json())
+    return response.json()
 
  
