@@ -89,7 +89,7 @@ async def jotform(request: Request):
         return { "status": "error", "message": f"Test Failed: {e}"}
 
     
-@router.post("/jotform/{channel_id}")
+@router.post("/jotform-notify/{channel_id}")
 async def jotform(request: Request, channel_id: str):
     try:
         form_data = await request.form()
