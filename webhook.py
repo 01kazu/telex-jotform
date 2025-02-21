@@ -2,6 +2,7 @@ import requests
 from fastapi import Request, APIRouter
 
 router = APIRouter()
+# how would i know the channel id is correct
 
     
 @router.post("/jotform-notify/{channel_id}")
@@ -15,7 +16,8 @@ async def jotform_notify(request: Request, channel_id: str):
             "status": "success",
             "username": "JotForm Bot"
         }
-        send_message(channel_id, telex_format)
+        response = send_message(channel_id, telex_format)
+        print(response)
     except Exception as e:
         print(f"Failed | error: {e}") # Add logging
         return {"status": "error", "message": str(e)}
@@ -26,5 +28,5 @@ def send_message(channel_id: str, telex_format: dict):
     response = requests.post(telex_webhook_url, 
                                 json=telex_format,
                                 headers={"Content-Type": "application/json"})
-
+    return response
  
