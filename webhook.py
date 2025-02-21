@@ -57,6 +57,7 @@ async def jotform(request: Request):
         print("start")
         body = await request.json()
         print("step 2")
+        print(body)
         channel_id = body.get("settings")[0].get("default")
         command = body.get("message")
         if command is None:
@@ -77,8 +78,8 @@ async def jotform(request: Request):
                 "status": "success",
                 "username": "JotForm Bot"
             }
-            send_message(channel_id, response)
-            # return response
+            # send_message(channel_id, response)
+            return response
         else:
             response = {
                 "event_name": "Invalid Command",
@@ -86,8 +87,8 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            send_message(channel_id, response)
-            # return response
+            # send_message(channel_id, response)
+            return response
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
 
