@@ -63,11 +63,11 @@ async def jotform(request: Request):
         if command is None:
             response = {
                 "event_name": "Invalid Command",
-                "message": f'Enter "/start" to activate JotForm Bot',
+                "message": f"Enter '/start' to activate JotForm Bot",
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            return response
+            return JSONResponse(response)
         command = command.strip().replace("<p>", "").replace("</p>", "")
         if command == "/start":
             jotform_url = f"https://telex-jotform.onrender.com/api/v1/jotform-notify/{channel_id}" # Put API URL in settings
@@ -77,25 +77,15 @@ async def jotform(request: Request):
                 "status": "success",
                 "username": "JotForm Bot"
             }
-            # send_message(channel_id, response)
-            channel_webhook_url = f"https://ping.telex.im/v1/webhooks/{channel_id}" # Put ping telex in settings
-            response = requests.post(channel_webhook_url, 
-                                json=response,
-                                headers={"Content-Type": "application/json"})
-            return response
+            return JSONResponse(response)
         else:
             response = {
                 "event_name": "Invalid Command",
-                "message": f'Enter "/start" to activate JotForm Bot',
+                "message": f" Enter '/start' to activate JotForm Bot" ,
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            # send_message(channel_id, response)
-            channel_webhook_url = f"https://ping.telex.im/v1/webhooks/{channel_id}" # Put ping telex in settings
-            response = requests.post(channel_webhook_url, 
-                                json=response,
-                                headers={"Content-Type": "application/json"})
-            return response
+            return JSONResponse(response)
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
 
