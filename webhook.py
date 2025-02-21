@@ -67,7 +67,6 @@ async def jotform(request: Request):
                 "status": "error",
                 "username": "JotForm Bot"   
             }
-            # send_message(channel_id, response)
             return response
         command = command.strip().replace("<p>", "").replace("</p>", "")
         if command == "/start":
@@ -79,6 +78,10 @@ async def jotform(request: Request):
                 "username": "JotForm Bot"
             }
             # send_message(channel_id, response)
+            channel_webhook_url = f"https://ping.telex.im/v1/webhooks/{channel_id}" # Put ping telex in settings
+            response = requests.post(channel_webhook_url, 
+                                json=response,
+                                headers={"Content-Type": "application/json"})
             return response
         else:
             response = {
@@ -88,6 +91,10 @@ async def jotform(request: Request):
                 "username": "JotForm Bot"   
             }
             # send_message(channel_id, response)
+            channel_webhook_url = f"https://ping.telex.im/v1/webhooks/{channel_id}" # Put ping telex in settings
+            response = requests.post(channel_webhook_url, 
+                                json=response,
+                                headers={"Content-Type": "application/json"})
             return response
     except Exception as e:
         return { "status": "error", "message": f"Test Failed: {e}"}
