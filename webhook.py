@@ -1,8 +1,5 @@
-import asyncio
-import requests
 import httpx
-from fastapi import Request, APIRouter, status
-from fastapi.responses import JSONResponse
+from fastapi import Request, APIRouter
 
 router = APIRouter()
 # how would i know the channel id is correct
@@ -20,8 +17,12 @@ async def jotform_notify(request: Request, channel_id: str):
                 "status": "success",
                 "username": "JotForm Notifier"
             }
-            response = send_message(channel_id, telex_format)
-            return JSONResponse(status_code = status.HTTP_200_OK, content = response)
+            response = await send_message(channel_id, telex_format)
+            if 200 <= response.status_code < 400:
+                return {"status": "success", "message": "Message sent successfully"}
+            return {"status": "error", "message": "Failed to send message"}
+
+        return {"status": "error", "message": "form title not found"}
     except Exception as e:
         print(f"Failed | error: {e}") # Add logging
         return {"status": "error", "message": str(e)}
@@ -33,5 +34,4 @@ async def send_message(channel_id: str, telex_format: dict):
         response = await client.post(
                 telex_webhook_url, json=telex_format, headers={"Content-Type": "application/json"}
             )
-
-    
+        return response

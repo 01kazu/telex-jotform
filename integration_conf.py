@@ -18,7 +18,7 @@ def get_integration_json(request: Request):
         "descriptions": {
           "app_name": "JotForm Notifier",
           "app_description": "This integration gives notifications when forms are filled on Jotform.",
-          "app_logo": "https://imgur.com/a/2T8DDoL",
+          "app_logo": "https://i.imgur.com/eN6LUVU.png",
           "app_url": base_url,
           "background_color": "#fff"
         },
