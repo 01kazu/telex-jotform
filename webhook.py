@@ -2,7 +2,6 @@ import httpx
 from fastapi import Request, APIRouter
 
 router = APIRouter()
-# how would i know the channel id is correct
 
     
 @router.post("/jotform-notify/{channel_id}")
