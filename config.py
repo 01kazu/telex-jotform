@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = secrets.token_urlsafe(32)
     DEBUG: bool = False
     TESTING: bool = False
+    TELEX_WEBHOOK: str = "https://ping.telex.im/v1/webhooks"
     
 
 settings = Settings()
