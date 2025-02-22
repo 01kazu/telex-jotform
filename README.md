@@ -38,6 +38,20 @@ uvicorn main:app
 - `POST /ap1/v1/jotform-notify/"channel_id"` - sends notifications to designated telex channels
 - `GET /api/v1/integration.json` - used to any integration on telex
 
+## Running Tests
+
+```bash
+pytest
+```
+
+## Error Handling
+
+The API includes proper error handling for:
+
+- Wrong form title key from the Request object
+- Failed Notifications
+
+
 ## USAGE
 ### How to connect this API to JotForm
 
