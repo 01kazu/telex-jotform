@@ -18,7 +18,7 @@ async def jotform_notify(request: Request, channel_id: str):
                 "event_name": "Form Sent",
                 "message": f"{form_title} has been filled",
                 "status": "success",
-                "username": "JotForm Bot"
+                "username": "JotForm Notifier"
             }
             response = send_message(channel_id, telex_format)
             return JSONResponse(status_code = status.HTTP_200_OK, content = response)
