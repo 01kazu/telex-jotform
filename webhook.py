@@ -37,6 +37,7 @@ async def jotform_notify(request: Request, channel_id: str):
 
 async def send_message(channel_id: str, telex_format: dict):
     telex_webhook_url = f"{settings.TELEX_WEBHOOK}/{channel_id}"
+    print(telex_webhook_url)
     async with httpx.AsyncClient() as client:
         response = await client.post(
                 telex_webhook_url, json=telex_format, 
