@@ -22,10 +22,12 @@ async def jotform_notify(request: Request, channel_id: str):
             }
             response = await send_message(channel_id, telex_format)
             if 200 <= response.status_code < 400:
+                print("message sent successfully")
                 return {"status": "success", "message": "Message sent successfully"}
+            print("Failed to send message")
             return JSONResponse(status_code=404, 
                                 content={"status": "error", "message": "Failed to send message"})
-
+        print("form title not found")
         return JSONResponse(status_code=404, 
                             content = {"status": "error", "message": "form title not found"})
     except Exception as e:
