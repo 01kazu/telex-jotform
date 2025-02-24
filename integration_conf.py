@@ -38,6 +38,7 @@ def get_integration_json(request: Request):
             "default": "Channel ID"
           }
         ],
+        "target_url": f"{base_url}/api/v1/nothing",
       }
     }
     return JSONResponse(content=integration_json)
